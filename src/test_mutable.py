@@ -1,7 +1,7 @@
 import unittest
 from hypothesis import given
 import hypothesis.strategies as st
-from lab1.mutable_version import *
+from mutable_version import *
 
 class TestMutableList(unittest.TestCase):
 

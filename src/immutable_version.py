@@ -1,4 +1,4 @@
-from lab1.mutable_version import MyHashMap
+from mutable_version import MyHashMap
 
 def size(vHashMap):
 	return vHashMap.size()
