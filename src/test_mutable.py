@@ -107,6 +107,11 @@ class TestMutableList(unittest.TestCase):
             tmp.append(e)
         self.assertEqual(x.sort(),tmp.sort())
 
+    def test_hashCollision(self):
+        lst = MyHashMap(vItem=[100,200,300])#100,200,300 have the same hash value, so the order does not change after the conflict is resolved
+        self.assertEqual(lst.to_list(),[100,200,300])
+        lst = MyHashMap(vItem=[16,32,48])
+        self.assertEqual(lst.to_list(),[16,32,48])
 
 if __name__=='__main__':
     unittest.main()

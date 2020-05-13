@@ -59,7 +59,7 @@ class MyHashMap(object):
             self.flag[HashKey]=1
             self.items[HashKey]=value
             return 
-        for i in range(HashKey,self.length):
+        for i in range(HashKey+1,self.length):
             if(self.flag[i]==0):
                 self.flag[i]=1
                 self.items[i]=value
