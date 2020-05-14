@@ -1,7 +1,11 @@
 import unittest
 from hypothesis import given
 import hypothesis.strategies as st
+
 from mutable_version import *
+
+from mutable_version import MyHashMap
+
 
 class TestMutableList(unittest.TestCase):
 
@@ -112,6 +116,24 @@ class TestMutableList(unittest.TestCase):
         self.assertEqual(lst.to_list(),[100,200,300])
         lst = MyHashMap(vItem=[16,32,48])
         self.assertEqual(lst.to_list(),[16,32,48])
+
+    @given(st.lists(st.integers()))
+    def test_monoid_identity(self, lst):
+        a = MyHashMap()
+        a.from_list(lst)
+        self.assertEqual(a.mconcat(a.mempty(),a), a)
+        self.assertEqual(a.mconcat(a,a.mempty()), a)
+
+    @given(a=st.lists(st.integers()), b=st.lists(st.integers()), c=st.lists(st.integers()))
+    def test_monoid_associativity(self, a, b, c):
+        l1 = MyHashMap(vItem=a)
+        l2 = MyHashMap(vItem=b)
+        l3 = MyHashMap(vItem=c)
+        aa = l1.mconcat(l1.mconcat(l1, l2), l3).to_list()
+        bb = l1.mconcat(l1, l1.mconcat(l2, l3)).to_list()
+        self.assertEqual(aa.sort(),bb.sort())
+
+
 
 if __name__=='__main__':
     unittest.main()

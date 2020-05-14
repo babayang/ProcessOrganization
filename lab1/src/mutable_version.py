@@ -107,6 +107,28 @@ class MyHashMap(object):
                 state=fun(state, self.items[i])
         return state
 
+    def mempty(self):
+        return None
+
+    def mconcat(self ,a, b):
+        if a != None and b != None:
+            lst = MyHashMap(a.length + b.length)
+            for i in range(a.length):
+                if (a.flag[i] == 1):
+                    lst.insert(a.items[i])
+            for i in range(b.length):
+                if (b.flag[i] == 1):
+                    lst.insert(b.items[i])
+            return lst
+        elif a:
+            # return MyHashMap(a.length,a.to_list())
+            return a
+        elif b:
+            # return MyHashMap(b.length,b.to_list())
+            return b
+        else:
+            return None
+
     def __iter__(self):
         return self
 

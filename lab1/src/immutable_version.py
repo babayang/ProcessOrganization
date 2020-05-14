@@ -43,7 +43,7 @@ def mconcat(a,b):
 		# return MyHashMap(b.length,b.to_list())
 		return b
 	else:
-		return None
+		return MyHashMap(vItem=[])
 
 def mempty():
 	return None
