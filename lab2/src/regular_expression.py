@@ -34,11 +34,11 @@ class Regex(object):
         resultgroup = construction.match2(input_string, nfa_machine, groupID)
         return "".join(resultgroup)
 
-st = 'aaaaabcccccasdzxc'
-pattern = '(\*?|a+)(zx|bc*)(asd|fgh)(zxc)'
-#
-regex = Regex(st, pattern)
-result = regex.matchAll()
+# st = 'aaaaabcccccasdzxc'
+# pattern = '(\*?|a+)(zx|bc*)(asd|fgh)(zxc)'
+# #
+# regex = Regex(st, pattern)
+# result = regex.matchAll()
 # print(result)
 # st = 'aaaaabcccccasdzxc'
 # pattern = '(\*?|a+)(zx|bc*)(asd|fgh)(zxc)'
