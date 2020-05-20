@@ -16,7 +16,7 @@
 
 6.Synopsis:We use the NFA way to write our regular expression state machine, first perform the lexical analysis of the expression, then use the bottom-up method for grammatical analysis, and then establish NFA, and finally used to match the string.
 
-7.Contribution Summary:JiabinYu's main contribution is in the grammatical analysis and the establishment of NFA, Kangyang's main contribution is in the lexical analysis and testing
+7.Contribution Summary:Kangyang's main contribution is in the grammatical analysis and the establishment of NFA, JiabinYu's main contribution is in the lexical analysis and testing
 
 8.Explanation of taken design decisions and analysis:NFA is a non-deterministic finite state automaton, mainly after grammatical analysis, according to the analysis results, in turn establish NFA node pairs, and finally generate a complete state machine
 
