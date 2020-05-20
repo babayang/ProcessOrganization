@@ -127,7 +127,7 @@ class MyHashMap(object):
             # return MyHashMap(b.length,b.to_list())
             return b
         else:
-            return None
+            return MyHashMap(vItem=[])
 
     def __iter__(self):
         return self

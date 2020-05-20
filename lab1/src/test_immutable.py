@@ -41,7 +41,7 @@ class TestMutableList(unittest.TestCase):
 
     @given(st.lists(st.integers()))
     def test_monoid_identity(self, lst):
-        a = MyHashMap()
+        a = MyHashMap(vItem=[1,2])
         a.from_list(lst)
         self.assertEqual(mconcat(mempty(),a), a)
         self.assertEqual(mconcat(a,mempty()), a)
@@ -49,8 +49,8 @@ class TestMutableList(unittest.TestCase):
     def test_hashCollision(self):
         lst = MyHashMap(vItem=[100,200,300])#100,200,300 have the same hash value, so the order does not change after the conflict is resolved
         self.assertEqual(lst.to_list(),[100,200,300])
-        lst = MyHashMap(vItem=[16,32,48])
-        self.assertEqual(lst.to_list(),[16,32,48])
+        lst = MyHashMap(vItem=[32,16,48])#have the same hash value, so the order does not change after the conflict is resolved
+        self.assertEqual(lst.to_list(),[32,16,48])
 
     @given(a=st.lists(st.integers()), b=st.lists(st.integers()), c=st.lists(st.integers()))
     def test_monoid_associativity(self,a,b,c):
