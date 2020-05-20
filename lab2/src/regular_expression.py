@@ -1,7 +1,7 @@
 
 
 import construction
-from src.construction import get_visualize
+from construction import get_visualize
 
 
 
@@ -19,18 +19,31 @@ class Regex(object):
         self.graph =  get_visualize(nfa_machine)
         return construction.match(input_string, nfa_machine)
 
-    def group(self):
-        pass
+    def matchAll(self):
+        for i in range(len(self.input_string)):
+            result = self.match()
+            if result:
+                break
+        return "".join(result)
 
-
+    def group(self, groupID):
+        pattern_string = self.pattern_string
+        input_string = self.input_string
+        nfa_machine = construction.pattern(pattern_string)
+        self.graph = get_visualize(nfa_machine)
+        resultgroup = construction.match2(input_string, nfa_machine, groupID)
+        return "".join(resultgroup)
 
 st = 'aaaaabcccccasdzxc'
 pattern = '(\*?|a+)(zx|bc*)(asd|fgh)(zxc)'
-
-for i in range(len(st)):
-    regex = Regex(st[i:], pattern)
-    result = regex.match()
-    if result:
-        print("".join(result))
-        print(regex.graph)
-        break
+#
+regex = Regex(st, pattern)
+result = regex.matchAll()
+# print(result)
+# st = 'aaaaabcccccasdzxc'
+# pattern = '(\*?|a+)(zx|bc*)(asd|fgh)(zxc)'
+#
+# regex = Regex(st, pattern)
+# #result = regex.match()
+# resultgroup=regex.group(2)
+# print(resultgroup)
