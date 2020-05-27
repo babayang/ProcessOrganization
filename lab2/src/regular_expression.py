@@ -24,6 +24,9 @@ class Regex(object):
             result = self.match()
             if result:
                 break
+            self.input_string = self.input_string[1:]
+        if result==None:
+            return ""
         return "".join(result)
 
     def group(self, groupID):
@@ -34,9 +37,9 @@ class Regex(object):
         resultgroup = construction.match2(input_string, nfa_machine, groupID)
         return "".join(resultgroup)
 
-# st = 'aaaaabcccccasdzxc'
+# st = 'hwhwhwhwhaaaaabcccccasdzxc'
 # pattern = '(\*?|a+)(zx|bc*)(asd|fgh)(zxc)'
-# #
+# # #
 # regex = Regex(st, pattern)
 # result = regex.matchAll()
 # print(result)

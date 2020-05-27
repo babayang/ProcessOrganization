@@ -229,6 +229,35 @@ def expr(pair_out):
     return True
 
 
+# factor connect
+def factor_conn(pair_out):
+    if is_conn(lexer.current_token):
+        factor(pair_out)
+
+    while is_conn(lexer.current_token):
+        pair = NfaPair()
+        factor(pair)
+        pair_out.end_node.next_1 = pair.start_node
+        pair_out.end_node = pair.end_node
+
+    return True
+
+
+def is_conn(token):
+    nc = [
+        Regular.OPEN_PAREN,
+        Regular.CLOSE_PAREN,
+        Regular.AT_EOL,
+        Regular.EOS,
+        Regular.CLOSURE,
+        Regular.PLUS_CLOSE,
+        Regular.CCL_END,
+        Regular.AT_BOL,
+        Regular.OR,
+    ]
+    return token not in nc
+
+
 def group(pair_out):
     global groupCount
     if lexer.match(Regular.OPEN_PAREN):
@@ -254,6 +283,11 @@ def group(pair_out):
                 lexer.advance()
         elif lexer.match(Regular.EOS):
             return False
+        elif lexer.match(Regular.AT_BOL):
+            lexer.advance()
+            group(pair_out)
+        elif lexer.match(Regular.AT_EOL):
+            return False
         else:
             expr(pair)
             pair_out.end_node.next_1 = pair.start_node
@@ -275,6 +309,9 @@ def match(input_string, nfa_machine):
             return None
         else:
             ls.append(ch)
+
+        # if len(ls)>0 and next_nfa_set is None:
+        #     return ls
 
         if has_accepted_state(next_nfa_set) and i == len(input_string) - 1:
             return ls
