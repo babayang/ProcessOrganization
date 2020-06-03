@@ -63,10 +63,14 @@ class  RegularExpression(unittest.TestCase):
         self.assertEqual(result, "aaaaabcccccasdzxc")
 
     def test_email(self):
-        st = "hhhffffsujshaaabbbccc@qq.com"
-        pat="a*b*c*@qq.com"
+        st = "hhhffffsuj792131173@qq.comdfsfsdf"
+        pat="^792131173@qq.com"
         result = Regex(st, pat).matchAll()
-        self.assertEqual(result, "aaabbbccc@qq.com")
+        self.assertEqual(result, "792131173@qq.com")
+        st = "hhhffffsujaleksandr.penskoi@itmo.rudfsfsdf"
+        pat = "^aleksandr.penskoi@itmo.ru"
+        result = Regex(st, pat).matchAll()
+        self.assertEqual(result, "aleksandr.penskoi@itmo.ru")
 
     def test_filename(self):
         st="/nihao/ykaaaaa/yjbbbbbb/yessssss"
@@ -80,11 +84,23 @@ class  RegularExpression(unittest.TestCase):
         result = Regex(st, pat).matchAll()
         self.assertEqual(result, "155555666667")
 
-    def test_notMatch(self):
+
+
+    def test_multiple_matches(self):
+        st = 'gfdgfgdfgregreghwhwhwhwhaaaaabcccccasdzxcsdafdsfsdfdg'
+        pat = '(\*?|a+)(zx|bc*)(asd|fgh)(zxc)'
+        result = Regex(st, pat).matchAll()
+        self.assertEqual(result, "aaaaabcccccasdzxc")
+        st = 'gfdgfgdfgregreg111122223333hwhaaaaabcccccasdzxcsdafdsfsdfdg'
+        pat = '1*2*3*'
+        result = Regex(st, pat).matchAll()
+        self.assertEqual(result, "111122223333")
+
+    def test_negative_tests(self):
         st = "qwertyuiop"
         pat = "asd*"
         result = Regex(st, pat).matchAll()
-        self.assertEqual(result, "")
+        self.assertEqual(result, "You should enter the correct expression")
 
 if __name__=="__main__":
     unittest.main()

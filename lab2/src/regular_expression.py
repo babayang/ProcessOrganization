@@ -20,13 +20,14 @@ class Regex(object):
         return construction.match(input_string, nfa_machine)
 
     def matchAll(self):
+        ins = self.input_string
         for i in range(len(self.input_string)):
             result = self.match()
             if result:
                 break
             self.input_string = self.input_string[1:]
-        if result==None:
-            return ""
+        if len(result)==0:
+            return "You should enter the correct expression"
         return "".join(result)
 
     def group(self, groupID):

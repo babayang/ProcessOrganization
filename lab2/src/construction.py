@@ -273,6 +273,7 @@ def group(pair_out):
 
     while True:
         pair = NfaPair()
+
         if lexer.match(Regular.OPEN_PAREN):
             groupCount = groupCount + 1
             lexer.advance()
@@ -304,14 +305,15 @@ def match(input_string, nfa_machine):
     for i, ch in enumerate(input_string):
         current_nfa_set = move(next_nfa_set, ch)
         next_nfa_set = closure(current_nfa_set)
-
         if next_nfa_set is None:
-            return None
+            return ls
         else:
             ls.append(ch)
 
         # if len(ls)>0 and next_nfa_set is None:
         #     return ls
+
+
 
         if has_accepted_state(next_nfa_set) and i == len(input_string) - 1:
             return ls
